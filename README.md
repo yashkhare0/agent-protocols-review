@@ -1,7 +1,6 @@
 # Agentic Protocols & Platforms Deep Dive
 
-*Research compiled: February 17, 2026*
-*For: Founder building "Shopify for agentic applications"*
+A comprehensive review of the emerging agent protocol ecosystem — MCP, ACP, UCT, A2A, and the ChatGPT Apps SDK.
 
 ---
 
@@ -180,7 +179,7 @@ In **December 2025**, Anthropic donated MCP to the **Agentic AI Foundation (AAIF
 - **Includes**: MCP as the foundation, potentially merging concepts from A2A/ACP
 - This is effectively the "universal" effort that UCP discussions pointed toward
 
-**If you've heard "UCP" in founder/VC circles**, it likely refers to this Linux Foundation standardization push rather than a distinct protocol.
+**If "UCP" appears in industry discussions**, it likely refers to this Linux Foundation standardization push rather than a distinct protocol.
 
 ---
 
@@ -501,7 +500,7 @@ ACP (IBM's protocol) was **merged into A2A** under the Linux Foundation. ACP's R
 6. **Salesforce** — Agentforce. CRM-specific agents.
 7. **Amazon** — Bedrock Agents. AWS ecosystem.
 
-### Strategic Insights for a Founder
+### Strategic Insights
 
 **The wedge**: Start with **MCP server hosting + marketplace**. Reasons:
 - MCP is the clear winner protocol (adopted by OpenAI, Google, Anthropic)
@@ -611,7 +610,7 @@ OpenAI is building an end-to-end agent platform. Here's every piece:
 4. **Computer use as moat**: CUA model gives agents ability to use ANY software via GUI — no API needed
 5. **ChatGPT as the OS**: Agent Mode turns ChatGPT into an "operating system" for digital tasks
 
-### Implications for "Shopify for Agents" Builder
+### Implications for Platform Builders
 
 **OpenAI is your biggest competitor AND your biggest distribution channel.**
 
@@ -624,7 +623,7 @@ OpenAI is building an end-to-end agent platform. Here's every piece:
 
 ---
 
-## Key Takeaways for a Founder
+## Key Takeaways
 
 ### 1. The Protocol Stack is Consolidating
 - **MCP** (Anthropic → Linux Foundation) = agent↔tools/data. The clear winner.
@@ -685,7 +684,7 @@ A2A (Google/LF)          → Collaboration layer: agent ↔ agent
 ChatGPT Apps SDK         → Distribution layer: apps inside ChatGPT (uses MCP)
 ```
 
-### What this means for CAPP:
-The entire agentic commerce stack is being built RIGHT NOW by the biggest players. CAPP sits at the **deployment/management layer** — the part nobody is building. Businesses need someone to take these protocols and make them usable, deploy agents that speak ACP + UCT + MCP + A2A, and package it as a simple platform.
+### What this means for platform builders:
+The entire agentic commerce stack is being built by the biggest players. The **deployment/management layer** remains wide open. The opportunity is a platform that ties these protocols together — making it easy for businesses to deploy agents that speak ACP + UCT + MCP + A2A without building from scratch.
 
 *End of research document. Last updated: February 17, 2026.*
