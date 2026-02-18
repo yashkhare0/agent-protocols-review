@@ -1,6 +1,7 @@
 # Agentic Protocols & Platforms Deep Dive
 
-A comprehensive review of the emerging agent protocol ecosystem — MCP, ACP, UCT, A2A, and the ChatGPT Apps SDK.
+*Research compiled: February 17, 2026*
+*For: Founder building "Shopify for agentic applications"*
 
 ---
 
@@ -179,7 +180,7 @@ In **December 2025**, Anthropic donated MCP to the **Agentic AI Foundation (AAIF
 - **Includes**: MCP as the foundation, potentially merging concepts from A2A/ACP
 - This is effectively the "universal" effort that UCP discussions pointed toward
 
-**If "UCP" appears in industry discussions**, it likely refers to this Linux Foundation standardization push rather than a distinct protocol.
+**If you've heard "UCP" in founder/VC circles**, it likely refers to this Linux Foundation standardization push rather than a distinct protocol.
 
 ---
 
@@ -500,7 +501,7 @@ ACP (IBM's protocol) was **merged into A2A** under the Linux Foundation. ACP's R
 6. **Salesforce** — Agentforce. CRM-specific agents.
 7. **Amazon** — Bedrock Agents. AWS ecosystem.
 
-### Strategic Insights
+### Strategic Insights for a Founder
 
 **The wedge**: Start with **MCP server hosting + marketplace**. Reasons:
 - MCP is the clear winner protocol (adopted by OpenAI, Google, Anthropic)
@@ -610,7 +611,7 @@ OpenAI is building an end-to-end agent platform. Here's every piece:
 4. **Computer use as moat**: CUA model gives agents ability to use ANY software via GUI — no API needed
 5. **ChatGPT as the OS**: Agent Mode turns ChatGPT into an "operating system" for digital tasks
 
-### Implications for Platform Builders
+### Implications for "Shopify for Agents" Builder
 
 **OpenAI is your biggest competitor AND your biggest distribution channel.**
 
@@ -623,7 +624,7 @@ OpenAI is building an end-to-end agent platform. Here's every piece:
 
 ---
 
-## Key Takeaways
+## Key Takeaways for a Founder
 
 ### 1. The Protocol Stack is Consolidating
 - **MCP** (Anthropic → Linux Foundation) = agent↔tools/data. The clear winner.
@@ -684,7 +685,203 @@ A2A (Google/LF)          → Collaboration layer: agent ↔ agent
 ChatGPT Apps SDK         → Distribution layer: apps inside ChatGPT (uses MCP)
 ```
 
-### What this means for platform builders:
-The entire agentic commerce stack is being built by the biggest players. The **deployment/management layer** remains wide open. The opportunity is a platform that ties these protocols together — making it easy for businesses to deploy agents that speak ACP + UCT + MCP + A2A without building from scratch.
+### What this means for CAPP:
+The entire agentic commerce stack is being built RIGHT NOW by the biggest players. CAPP sits at the **deployment/management layer** — the part nobody is building. Businesses need someone to take these protocols and make them usable, deploy agents that speak ACP + UCT + MCP + A2A, and package it as a simple platform.
 
-*End of research document. Last updated: February 17, 2026.*
+---
+
+## 9. ANP — Agent Network Protocol
+
+### Overview
+
+| Attribute | Detail |
+|-----------|--------|
+| **Created by** | Open-source community (chgaowei), W3C Community Group submission |
+| **Website** | [agent-network-protocol.com](https://agent-network-protocol.com/) |
+| **GitHub** | [github.com/agent-network-protocol/AgentNetworkProtocol](https://github.com/agent-network-protocol/AgentNetworkProtocol) (1.7K+ stars) |
+| **Goal** | "The HTTP of the Agentic Web era" — define how agents connect with each other |
+| **ArXiv** | 2508.00007 (July 2025) |
+| **Status** | Identity layer and meta-protocol substantially complete. Application layer in progress |
+
+### Three-Layer Architecture
+
+| Layer | Function | Details |
+|-------|----------|---------|
+| **Identity Layer** | Decentralized authentication | Based on W3C DID (Decentralized Identifiers). Provides end-to-end encrypted communication between agents |
+| **Meta-Protocol Layer** | Dynamic protocol negotiation | Agents self-organize and self-negotiate communication protocols at runtime — no pre-agreed schemas needed |
+| **Application Layer** | Capability description | Semantic-based capability description built on semantic web specifications |
+
+### Key Differentiator
+
+ANP is **fully decentralized** — no central platform dependency. Agents from ANY platform can authenticate each other using DIDs. This is a fundamentally different philosophy from MCP/A2A, which still assume some level of centralized discovery or orchestration.
+
+### Vision
+
+A shift from **platform-centric to protocol-centric** internet. In ANP's model, each agent is both a consumer and a service provider. Instead of agents being locked into platforms (OpenAI, Google, etc.), they communicate peer-to-peer through a shared protocol layer — much like how HTTP enabled the open web regardless of which server software you ran.
+
+### Relevance to firo
+
+If building "Shopify for agents," ANP could be the **networking layer** that enables agents deployed on firo to discover and communicate with agents on other platforms. While MCP handles tool integration and A2A handles orchestration, ANP addresses the fundamental question of *how agents find and authenticate each other across platform boundaries* — critical for a truly open agent marketplace.
+
+---
+
+## 10. AG-UI — Agent–User Interaction Protocol
+
+### Overview
+
+| Attribute | Detail |
+|-----------|--------|
+| **Created by** | CopilotKit (open source) |
+| **Website** | [docs.ag-ui.com](https://docs.ag-ui.com/) |
+| **What it is** | Open, lightweight, event-based protocol that standardizes how AI agents connect to user-facing applications |
+| **Status** | Active development |
+
+### The "Missing Link"
+
+While **MCP** handles Agent↔Tools and **A2A** handles Agent↔Agent, **AG-UI** handles **Agent↔User** — the frontend connection that was previously undefined by any protocol. This completes what AG-UI's docs call the **three-protocol stack**:
+
+| Protocol | Connection | Direction |
+|----------|-----------|-----------|
+| **AG-UI** | Agent ↔ User Interaction | Frontend connection |
+| **MCP** | Agent ↔ Tools & Data | Backend connection |
+| **A2A** | Agent ↔ Agent | Coordination |
+
+### Building Blocks
+
+- **Streaming chat** — Real-time bidirectional event streaming between agent and user interface
+- **State management** — Agent state synchronization with frontend applications
+- **Tool calls with human-in-the-loop** — Users can approve, modify, or reject agent tool calls in real-time
+- **Generative UI** — Dynamic UI generation based on agent responses
+- **Reasoning visibility** — Exposing agent reasoning/thinking to the user
+- **Middleware** — Interceptors for logging, transformation, routing
+- **Serialization** — Standardized event format across frameworks
+
+### Framework Support
+
+AG-UI supports multiple agent frameworks out of the box: **LangGraph, CrewAI, Mastra, AG2**, and others — meaning any agent built with these frameworks can connect to any AG-UI-compatible frontend.
+
+### Important Distinction
+
+**A2UI** (generative UI spec) is **different** from AG-UI:
+- **A2UI** lets agents deliver UI widgets (the *what* of the interface)
+- **AG-UI** is the transport protocol (the *how* of the connection)
+
+### Relevance to firo
+
+**Critical for the frontend layer.** If firo deploys agents for businesses, AG-UI defines how those agents interact with end-users through web/mobile interfaces. A firo-hosted agent could use MCP for backend tool access, A2A for coordinating with other agents, and AG-UI for presenting its interface to customers — making AG-UI the protocol that connects the agent to the actual user experience.
+
+---
+
+## 11. Agora Protocol
+
+### Overview
+
+| Attribute | Detail |
+|-----------|--------|
+| **Type** | Research concept / framework, not a single production protocol |
+| **Domain** | Multi-agent marketplace/negotiation frameworks |
+| **Roots** | Academic research on agent-based negotiation, auction mechanisms, and marketplace dynamics |
+
+### The Concept
+
+"Agora" in the agent protocol space refers to the idea of a **marketplace where agents can discover, negotiate with, and transact with other agents autonomously**. This draws from decades of multi-agent systems research in e-commerce, auction theory, and mechanism design.
+
+### Relevant Work
+
+- Academic papers on agent negotiation protocols (automated bargaining, contract nets)
+- Multi-agent systems for e-commerce and supply chain coordination
+- Decentralized marketplace protocols where agents bid, offer, and settle transactions
+
+### Why It Matters for firo
+
+The "Agora" concept **IS essentially what firo is building** — a marketplace/platform where agents are deployed, discovered, and interact. The protocol layer underneath could combine:
+- **A2A** for agent coordination and task delegation
+- **ACP/UCT** for commerce and transaction handling
+- **ANP** for cross-platform discovery and authentication
+
+Firo's opportunity is to be the **implementation of the Agora concept** using production-ready protocols, turning academic theory into a real platform.
+
+---
+
+## 12. OVON — Open Voice Network
+
+### Overview
+
+| Attribute | Detail |
+|-----------|--------|
+| **Created by** | Linux Foundation (Open Voice Network project) |
+| **Focus** | Interoperability between voice-based AI agents and assistants |
+| **Status** | Active within Linux Foundation, specs in development |
+
+### Key Specifications
+
+- **Universal API** for voice agent interoperability — standardizing how voice agents expose capabilities
+- **Agent-to-agent delegation** for voice — defining how one voice agent hands off a conversation to another (e.g., Alexa delegating to a restaurant's booking agent)
+
+### Why It Matters
+
+As agents increasingly have voice interfaces (Alexa, Siri, Google Assistant, custom voice agents), OVON defines how voice agents **hand off between each other**. Without this, a user talking to Siri who needs a service from a different voice agent would hit a dead end — OVON enables seamless cross-platform voice delegation.
+
+### Relevance to firo
+
+If clients want **voice-based agents** (restaurant ordering, customer service hotlines, healthcare appointment scheduling), OVON compatibility could be a differentiator. A firo-hosted agent that speaks OVON can be delegated to by Alexa, Google Assistant, or any other OVON-compatible voice platform — expanding distribution beyond text/web interfaces.
+
+---
+
+## 13. Updated Protocol Landscape — Comprehensive Comparison
+
+| Protocol | Layer | Creator | Focus | Status | Key Strength |
+|----------|-------|---------|-------|--------|-------------|
+| **MCP** | Agent ↔ Tools/Data | Anthropic → Linux Foundation | Connect agents to external systems | Production, massive adoption | De facto standard for tool integration |
+| **A2A** | Agent ↔ Agent | Google → Linux Foundation | Agent collaboration | Production | Multi-agent orchestration |
+| **ACP** | Commerce | OpenAI + Stripe | Agent payments/transactions | Early stage | Commerce-native, major backers |
+| **UCT** | Commerce/Retail | Google + Shopify | Shopping/retail transactions | Early stage | Retail-specific, major backers |
+| **AG-UI** | Agent ↔ User | CopilotKit | Frontend connection | Active development | Only protocol for agent-to-user |
+| **ANP** | Networking | Open source community | Agent discovery & connection | Alpha | Decentralized, "HTTP for agents" |
+| **OVON** | Voice | Linux Foundation | Voice agent interop | Specs in dev | Voice-specific handoffs |
+| **ChatGPT Apps SDK** | Distribution | OpenAI | Apps inside ChatGPT | Production | Largest user base |
+| **GPT Actions** | Integration | OpenAI | ChatGPT ↔ REST APIs | Production | Simple OpenAPI-based |
+
+### The Complete Agentic Stack (Updated)
+
+```
+┌─────────────────────────────────────────────────────────────┐
+│                    USER / FRONTEND                           │
+│                      AG-UI (CopilotKit)                     │
+│              Agent ↔ User Interaction Protocol               │
+├─────────────────────────────────────────────────────────────┤
+│                   DISTRIBUTION LAYER                         │
+│    ChatGPT Apps SDK  │  GPT Actions  │  Voice (OVON)        │
+├─────────────────────────────────────────────────────────────┤
+│                  COLLABORATION LAYER                         │
+│              A2A (Google → Linux Foundation)                 │
+│              Agent ↔ Agent Communication                     │
+├─────────────────────────────────────────────────────────────┤
+│                    COMMERCE LAYER                            │
+│         ACP (OpenAI + Stripe)  │  UCT (Google + Shopify)    │
+│         Payments/Transactions  │  Retail/Shopping            │
+├─────────────────────────────────────────────────────────────┤
+│                   NETWORKING LAYER                           │
+│                    ANP (Open Source)                         │
+│        Decentralized Discovery & Authentication              │
+├─────────────────────────────────────────────────────────────┤
+│                     BASE LAYER                               │
+│              MCP (Anthropic → Linux Foundation)              │
+│              Agent ↔ Tools & Data (Universal)                │
+└─────────────────────────────────────────────────────────────┘
+```
+
+### What This Means for firo
+
+Firo's deployment/management platform sits **across all these layers**. A business deploying an agent through firo needs:
+- **MCP** for connecting to their tools and data
+- **ANP** for being discoverable by agents on other platforms
+- **A2A** for collaborating with partner agents
+- **ACP/UCT** for handling transactions
+- **AG-UI** for presenting the agent to end-users
+- **OVON** (optionally) for voice interfaces
+- **ChatGPT Apps SDK / GPT Actions** for distribution through ChatGPT
+
+The platform that makes all of this **simple to deploy and manage** wins.
+
+*End of research document. Last updated: February 18, 2026.*
