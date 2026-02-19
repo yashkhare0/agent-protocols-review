@@ -9,7 +9,7 @@
 
 1. [ChatGPT Apps/Plugins/GPTs Ecosystem](#1-chatgpt-appspluginsgpts-ecosystem)
 2. [ACP — Agentic Commerce Protocol](#2-acp--agentic-commerce-protocol)
-3. [UCP — Universal Context Protocol](#3-ucp--universal-context-protocol)
+3. [UCP — Universal Commerce Protocol](#3-ucp--universal-commerce-protocol)
 4. [MCP — Model Context Protocol](#4-mcp--model-context-protocol)
 5. [A2A — Agent-to-Agent Protocol (Google)](#5-a2a--agent-to-agent-protocol-google)
 6. [How These Protocols Relate](#6-how-these-protocols-relate)
@@ -146,41 +146,56 @@ With ACP, the agent could say "This translation costs €2. Confirm?" → user c
 
 - **MCP** = what the agent *can do* (tools, data)
 - **ACP** = how the agent *gets paid* for doing it (commerce, transactions)
-- **UCT** = Google+Shopify's commerce protocol (retail/shopping focused)
+- **UCP** = Google+Shopify's commerce protocol (retail/shopping focused)
 - **A2A** = how agents *coordinate* with each other
 
-ACP and UCT both address commerce but from different angles — ACP is payment-infrastructure-first (Stripe DNA), UCT is retail-catalog-first (Google Shopping DNA).
+ACP and UCP both address commerce but from different angles — ACP is payment-infrastructure-first (Stripe DNA), UCP is retail-catalog-first (Google Shopping DNA).
 
 > **Note on naming**: IBM previously used "ACP" for their "Agent Communication Protocol" (agent-to-agent communication). That protocol has been **merged into Google's A2A** under the Linux Foundation and is no longer active as a separate standard. In the current landscape, ACP refers to the **Agentic Commerce Protocol** by OpenAI + Stripe.
 
 ---
 
-## 3. UCP — Universal Context Protocol
+## 3. UCP — Universal Commerce Protocol
 
-### Status: Limited Information
+### Overview
 
-**UCP does not appear to be a widely established or documented protocol** as of February 2026. The term "Universal Context Protocol" has been used in various informal contexts but does not have:
-- An official specification
-- A dedicated website
-- A recognized standards body backing it
-- Significant GitHub presence
+| Attribute | Detail |
+|-----------|--------|
+| **Created by** | **Google + Shopify** |
+| **Announced** | 2025 |
+| **Current status** | Early stage, actively developing |
+| **Focus** | Retail and shopping commerce for agents |
 
-### Possible References
+### What UCP Solves
 
-The term may refer to:
-1. **Informal discussions** about creating a "universal" version of MCP that isn't Anthropic-controlled
-2. **The broader standardization effort** now happening under the Linux Foundation's Agentic AI Foundation (AAIF), where MCP was donated in December 2025 alongside OpenAI and Block
-3. **Conflation with other protocols** — some commentators use "UCP" loosely when discussing the need for a universal standard
+UCP standardizes how AI agents interact with **retail and commerce systems** — product catalogs, inventory, shopping carts, order management. While ACP (OpenAI + Stripe) focuses on the payment rail itself, UCP focuses on the **shopping experience**: browsing products, comparing options, managing carts, and completing purchases through agent interfaces.
 
-### The Actual Standardization Effort: Agentic AI Foundation (AAIF)
+### Why Google + Shopify
 
-In **December 2025**, Anthropic donated MCP to the **Agentic AI Foundation (AAIF)**, a directed fund under the Linux Foundation:
-- **Co-founded by**: Anthropic, Block (Square/Cash App), and OpenAI
-- **Goal**: Vendor-neutral governance of agentic AI standards
-- **Includes**: MCP as the foundation, potentially merging concepts from A2A/ACP
-- This is effectively the "universal" effort that UCP discussions pointed toward
+- **Google** = Search, Shopping, product knowledge graph, Google Pay
+- **Shopify** = powers millions of online stores, owns the merchant relationship
+- Together they're defining how agents browse, compare, and buy from online stores — the retail-specific commerce standard
 
-**If you've heard "UCP" in founder/VC circles**, it likely refers to this Linux Foundation standardization push rather than a distinct protocol.
+### Key Capabilities
+
+| Capability | Description |
+|------------|-------------|
+| **Product discovery** | Agents can search and browse product catalogs programmatically |
+| **Inventory awareness** | Real-time stock/availability information |
+| **Cart management** | Add/remove items, apply coupons, calculate totals |
+| **Order lifecycle** | Place orders, track shipping, handle returns |
+| **Merchant integration** | Standardized way for any Shopify/online store to be agent-accessible |
+
+### ACP vs UCP
+
+| | ACP (OpenAI + Stripe) | UCP (Google + Shopify) |
+|---|---|---|
+| **DNA** | Payment infrastructure | Retail/catalog infrastructure |
+| **Strength** | Any transaction type (subscriptions, per-use, tips) | Shopping-specific (products, carts, orders) |
+| **Merchant side** | Stripe integration | Shopify/Google Shopping integration |
+| **Agent side** | ChatGPT ecosystem | Google/Gemini ecosystem |
+
+They're complementary — a full agent commerce stack likely uses both. UCP for browsing and selecting products, ACP for processing the actual payment.
 
 ---
 
@@ -763,7 +778,7 @@ AG-UI supports multiple agent frameworks out of the box: **LangGraph, CrewAI, Ma
 
 The "Agora" concept **IS essentially what firo is building** — a marketplace/platform where agents are deployed, discovered, and interact. The protocol layer underneath could combine:
 - **A2A** for agent coordination and task delegation
-- **ACP/UCT** for commerce and transaction handling
+- **ACP/UCP** for commerce and transaction handling
 - **ANP** for cross-platform discovery and authentication
 
 Firo's opportunity is to be the **implementation of the Agora concept** using production-ready protocols, turning academic theory into a real platform.
@@ -802,7 +817,7 @@ If clients want **voice-based agents** (restaurant ordering, customer service ho
 | **MCP** | Agent ↔ Tools/Data | Anthropic → Linux Foundation | Connect agents to external systems | Production, massive adoption | De facto standard for tool integration |
 | **A2A** | Agent ↔ Agent | Google → Linux Foundation | Agent collaboration | Production | Multi-agent orchestration |
 | **ACP** | Commerce | OpenAI + Stripe | Agent payments/transactions | Early stage | Commerce-native, major backers |
-| **UCT** | Commerce/Retail | Google + Shopify | Shopping/retail transactions | Early stage | Retail-specific, major backers |
+| **UCP** | Commerce/Retail | Google + Shopify | Shopping/retail transactions | Early stage | Retail-specific, major backers |
 | **AG-UI** | Agent ↔ User | CopilotKit | Frontend connection | Active development | Only protocol for agent-to-user |
 | **ANP** | Networking | Open source community | Agent discovery & connection | Alpha | Decentralized, "HTTP for agents" |
 | **OVON** | Voice | Linux Foundation | Voice agent interop | Specs in dev | Voice-specific handoffs |
@@ -825,7 +840,7 @@ If clients want **voice-based agents** (restaurant ordering, customer service ho
 │              Agent ↔ Agent Communication                     │
 ├─────────────────────────────────────────────────────────────┤
 │                    COMMERCE LAYER                            │
-│         ACP (OpenAI + Stripe)  │  UCT (Google + Shopify)    │
+│         ACP (OpenAI + Stripe)  │  UCP (Google + Shopify)    │
 │         Payments/Transactions  │  Retail/Shopping            │
 ├─────────────────────────────────────────────────────────────┤
 │                   NETWORKING LAYER                           │
@@ -844,7 +859,7 @@ Firo's deployment/management platform sits **across all these layers**. A busine
 - **MCP** for connecting to their tools and data
 - **ANP** for being discoverable by agents on other platforms
 - **A2A** for collaborating with partner agents
-- **ACP/UCT** for handling transactions
+- **ACP/UCP** for handling transactions
 - **AG-UI** for presenting the agent to end-users
 - **OVON** (optionally) for voice interfaces
 - **ChatGPT Apps SDK / GPT Actions** for distribution through ChatGPT
