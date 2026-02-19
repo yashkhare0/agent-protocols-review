@@ -8,7 +8,7 @@
 ## Table of Contents
 
 1. [ChatGPT Apps/Plugins/GPTs Ecosystem](#1-chatgpt-appspluginsgpts-ecosystem)
-2. [ACP — Agent Communication Protocol](#2-acp--agent-communication-protocol)
+2. [ACP — Agentic Commerce Protocol](#2-acp--agentic-commerce-protocol)
 3. [UCP — Universal Context Protocol](#3-ucp--universal-context-protocol)
 4. [MCP — Model Context Protocol](#4-mcp--model-context-protocol)
 5. [A2A — Agent-to-Agent Protocol (Google)](#5-a2a--agent-to-agent-protocol-google)
@@ -91,67 +91,67 @@ GPT Actions are the core extension mechanism for Custom GPTs. They allow ChatGPT
 
 ---
 
-## 2. ACP — Agent Communication Protocol
+## 2. ACP — Agentic Commerce Protocol
 
 ### Overview
 
 | Attribute | Detail |
 |-----------|--------|
-| **Created by** | IBM Research (BeeAI team, "i-am-bee" on GitHub) |
-| **Announced** | 2024 |
-| **Current status** | **Merged into A2A under the Linux Foundation** (as of early 2025) |
-| **License** | Apache 2.0 |
-| **Website** | agentcommunicationprotocol.dev |
-| **GitHub** | github.com/i-am-bee/acp |
+| **Created by** | **OpenAI + Stripe** |
+| **Announced** | 2025 |
+| **Current status** | Early stage, actively developing |
+| **Focus** | Commerce and payments in the agentic stack |
 
 ### What ACP Solves
 
-ACP is an open protocol for **agent-to-agent communication**. While MCP connects agents to *tools and data*, ACP connects *agents to other agents*. Key problem: AI agents are built in isolation across different frameworks (LangChain, CrewAI, custom code), creating integration barriers.
+ACP is the **commerce layer** for AI agents. While MCP connects agents to tools/data and A2A handles agent-to-agent collaboration, ACP answers: **how does an agent handle money?**
 
-### Architecture & Key Concepts
+The core problem: when an AI agent is acting on behalf of a user — booking a hotel, translating a document, purchasing a subscription — there's no standard way for the agent to:
+1. **Discover pricing** for a service
+2. **Initiate a transaction** on behalf of the user
+3. **Handle checkout** within the agent flow (not redirecting to a website)
+4. **Process payments** securely with user consent
+5. **Manage subscriptions/metering** for ongoing agent services
 
-**REST-based** — Simple HTTP endpoints, no specialized transport like JSON-RPC:
+### Why OpenAI + Stripe
 
-- `GET /agents` — List available agents (discovery)
-- `POST /runs` — Execute an agent run
-- `GET /runs/{id}` — Check run status
-- Streaming via SSE (Server-Sent Events)
+- **Stripe** = the payments backbone of the internet (processing for millions of businesses)
+- **OpenAI** = the largest AI platform with ChatGPT's user base
+- Together they're building the standard for how agents transact — Stripe handles the money movement, OpenAI provides the agent orchestration context
 
-**Core Concepts**:
+### The Gap ACP Fills (Real-World Example)
 
-| Concept | Description |
-|---------|-------------|
-| **Agent Manifest** | Describes agent capabilities (name, description, metadata) for discovery |
-| **Run** | A single agent execution with inputs → outputs. Supports sync/async/streaming |
-| **Message** | Core communication structure — ordered sequence of MessageParts |
-| **MessagePart** | Individual content unit (text, image, JSON, binary). Uses MIME types |
-| **Await** | Agent pauses execution to request input from client, then resumes |
-| **Sessions** | Stateful conversation history across multiple runs |
-| **Trajectory Metadata** | Tracking multi-step reasoning and tool calling |
-| **Citation Metadata** | Source tracking and attribution |
+Consider a ChatGPT MCP app for document translation:
+- MCP server exposes translation tools ✅
+- Widget renders upload/download UI inside ChatGPT ✅
+- OAuth authenticates users ✅
+- **But if a translation is paywalled** — the agent cannot trigger a checkout, charge per-use, or let the user pay within the conversation ❌
 
-**Key Features**:
-- **All modalities** — text, images, audio, video, custom binary via MIME types
-- **Sync and async** — Async-first but sync fully supported
-- **Streaming** — Real-time output via SSE
-- **Stateful and stateless** — Sessions optional
-- **Offline discovery** — Agent metadata embedded in distribution packages
-- **No SDK required** — Works with curl/Postman, but Python and TypeScript SDKs available
-- **Distributed sessions** — Session continuity across server instances
-- **High availability** — Redis/PostgreSQL backends for scalable deployments
+Without ACP, the user has to leave ChatGPT → go to the service's website → upgrade → come back. Flow broken.
 
-### SDKs
+With ACP, the agent could say "This translation costs €2. Confirm?" → user confirms → Stripe processes → translation delivers. All in-flow.
 
-- **Python SDK** (`acp-sdk` on PyPI) — Server + client + models
-- **TypeScript SDK** (`acp-sdk` on npm) — Client library + models
+### Key Capabilities
 
-### Relationship to A2A
+| Capability | Description |
+|------------|-------------|
+| **In-flow checkout** | Payment UI rendered within the agent conversation (no redirect) |
+| **Agent-initiated purchases** | Agent can propose and execute transactions on user's behalf |
+| **Per-use billing** | Metered charges for individual actions (translate a doc, generate an image) |
+| **Subscription management** | Create/upgrade/cancel subscriptions through agent interaction |
+| **Payment confirmation** | Human-in-the-loop approval before charges |
+| **Receipt/invoicing** | Transaction records accessible to both agent and user |
 
-**Critical update**: ACP has been folded into Google's A2A (Agent-to-Agent) protocol under the Linux Foundation. There's a migration guide available. The protocols share the same goals (agent interoperability) and ACP's concepts influenced A2A's design.
+### Relationship to Other Protocols
 
-### Reference Implementation
+- **MCP** = what the agent *can do* (tools, data)
+- **ACP** = how the agent *gets paid* for doing it (commerce, transactions)
+- **UCT** = Google+Shopify's commerce protocol (retail/shopping focused)
+- **A2A** = how agents *coordinate* with each other
 
-**BeeAI Platform** (github.com/i-am-bee/beeai-platform) — Discover, run, and share ACP agents. Acts as a registry/runtime for ACP-compatible agents.
+ACP and UCT both address commerce but from different angles — ACP is payment-infrastructure-first (Stripe DNA), UCT is retail-catalog-first (Google Shopping DNA).
+
+> **Note on naming**: IBM previously used "ACP" for their "Agent Communication Protocol" (agent-to-agent communication). That protocol has been **merged into Google's A2A** under the Linux Foundation and is no longer active as a separate standard. In the current landscape, ACP refers to the **Agentic Commerce Protocol** by OpenAI + Stripe.
 
 ---
 
@@ -658,34 +658,5 @@ Just as Shopify didn't compete with Amazon but enabled merchants to build their 
 ---
 
 ---
-
-## CORRECTIONS — Updated Protocol Map (from Yash's briefing)
-
-**The earlier sections on ACP may reference the IBM/BeeAI version. Here's the corrected picture:**
-
-### ACP = Agentic Commerce Protocol (OpenAI + Stripe)
-- Built by **OpenAI and Stripe** together — specifically for commerce in the agentic stack
-- Stripe = payments backbone + OpenAI = AI backbone = commerce-native agents
-
-### UCT = Universal Commerce Protocol (Google)
-- Led by **Google**, already integrating with **Shopify** and other commerce platforms
-- Google's standardization for how agents interact with commerce/retail systems
-
-### ChatGPT Apps SDK
-- Standardization for creating **apps inside ChatGPT**
-- Serves **widgets** for users to interact with applications
-- Uses **MCPs as the response format** — MCP is the foundational layer under everything
-
-### Updated Full Stack:
-```
-MCP (Anthropic)          → Base layer: agent ↔ tools/data (universal)
-ACP (OpenAI + Stripe)    → Commerce layer: agent ↔ payments/transactions
-UCT (Google + Shopify)   → Commerce layer: agent ↔ retail/shopping
-A2A (Google/LF)          → Collaboration layer: agent ↔ agent
-ChatGPT Apps SDK         → Distribution layer: apps inside ChatGPT (uses MCP)
-```
-
-### What this means for CAPP:
-The entire agentic commerce stack is being built RIGHT NOW by the biggest players. CAPP sits at the **deployment/management layer** — the part nobody is building. Businesses need someone to take these protocols and make them usable, deploy agents that speak ACP + UCT + MCP + A2A, and package it as a simple platform.
 
 *End of research document. Last updated: February 17, 2026.*
