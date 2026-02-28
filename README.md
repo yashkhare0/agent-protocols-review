@@ -748,42 +748,6 @@ AG-UI supports multiple agent frameworks out of the box: **LangGraph, CrewAI, Ma
 - **A2UI** lets agents deliver UI widgets (the *what* of the interface)
 - **AG-UI** is the transport protocol (the *how* of the connection)
 
-### Relevance to firo
-
-**Critical for the frontend layer.** If firo deploys agents for businesses, AG-UI defines how those agents interact with end-users through web/mobile interfaces. A firo-hosted agent could use MCP for backend tool access, A2A for coordinating with other agents, and AG-UI for presenting its interface to customers — making AG-UI the protocol that connects the agent to the actual user experience.
-
----
-
-## 11. Agora Protocol
-
-### Overview
-
-| Attribute | Detail |
-|-----------|--------|
-| **Type** | Research concept / framework, not a single production protocol |
-| **Domain** | Multi-agent marketplace/negotiation frameworks |
-| **Roots** | Academic research on agent-based negotiation, auction mechanisms, and marketplace dynamics |
-
-### The Concept
-
-"Agora" in the agent protocol space refers to the idea of a **marketplace where agents can discover, negotiate with, and transact with other agents autonomously**. This draws from decades of multi-agent systems research in e-commerce, auction theory, and mechanism design.
-
-### Relevant Work
-
-- Academic papers on agent negotiation protocols (automated bargaining, contract nets)
-- Multi-agent systems for e-commerce and supply chain coordination
-- Decentralized marketplace protocols where agents bid, offer, and settle transactions
-
-### Why It Matters for firo
-
-The "Agora" concept **IS essentially what firo is building** — a marketplace/platform where agents are deployed, discovered, and interact. The protocol layer underneath could combine:
-- **A2A** for agent coordination and task delegation
-- **ACP/UCP** for commerce and transaction handling
-- **ANP** for cross-platform discovery and authentication
-
-Firo's opportunity is to be the **implementation of the Agora concept** using production-ready protocols, turning academic theory into a real platform.
-
----
 
 ## 12. OVON — Open Voice Network
 
